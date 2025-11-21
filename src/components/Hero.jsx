@@ -1,6 +1,7 @@
 import Spline from '@splinetool/react-spline'
 import { motion } from 'framer-motion'
 import MorphingBackdrop from './MorphingBackdrop'
+import LightRays from './LightRays'
 
 export default function Hero({ onPrimary }) {
   return (
@@ -14,6 +15,9 @@ export default function Hero({ onPrimary }) {
 
       {/* morphing science backdrop */}
       <MorphingBackdrop />
+
+      {/* mouse-following light rays */}
+      <LightRays />
 
       {/* 3D Spline hero object */}
       <div className="absolute inset-0" aria-hidden>

@@ -5,6 +5,8 @@ import ScienceGlobe from './components/ScienceGlobe'
 import ParticleField from './components/ParticleField'
 import FooterCTA from './components/FooterCTA'
 import ScrollScenes from './components/ScrollScenes'
+import WarpTransition from './components/WarpTransition'
+import AudioGlow from './components/AudioGlow'
 
 function App() {
   const handleStart = useCallback(() => {
@@ -22,12 +24,20 @@ function App() {
       {/* motion-enhanced scroll container */}
       <div className="relative">
         <ScrollScenes>
-          <Hero onPrimary={handleStart} />
-          <div id="modules">
-            <ModuleOrbit />
-          </div>
-          <ScienceGlobe />
-          <FooterCTA />
+          <WarpTransition>
+            <Hero onPrimary={handleStart} />
+          </WarpTransition>
+          <WarpTransition id="modules">
+            <AudioGlow>
+              <ModuleOrbit />
+            </AudioGlow>
+          </WarpTransition>
+          <WarpTransition>
+            <ScienceGlobe />
+          </WarpTransition>
+          <WarpTransition>
+            <FooterCTA />
+          </WarpTransition>
         </ScrollScenes>
       </div>
     </div>

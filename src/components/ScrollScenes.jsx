@@ -7,7 +7,7 @@ export default function ScrollScenes({ children }) {
   const containerRef = useRef(null)
   const { scrollYProgress } = useScroll({ target: containerRef, offset: ['start start', 'end end'] })
 
-  const fogOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [0.1, 0.3, 0.15])
+  const fogOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [0.08, 0.22, 0.12])
   const hueRotate = useTransform(scrollYProgress, [0, 1], ['0deg', '20deg'])
   const scaleScene = useTransform(scrollYProgress, [0, 1], [1, 1.04])
 
@@ -19,7 +19,9 @@ export default function ScrollScenes({ children }) {
   return (
     <motion.div ref={containerRef} style={{ filter: hueRotate, scale: scaleScene }} className="relative">
       <motion.div className="pointer-events-none fixed inset-0 z-[5]" style={{ opacity: fogOpacity }}>
-        <div className="absolute inset-0 bg-[radial-gradient(60%_40%_at_50%_0%,rgba(10,30,60,0.8),rgba(0,0,0,0.6))]" />
+        <div className="absolute inset-0 bg-[radial-gradient(60%_40%_at_50%_0%,rgba(10,30,60,0.7),rgba(0,0,0,0.6))]" />
+        {/* subtle star flecks */}
+        <div className="absolute inset-0 opacity-30" style={{ backgroundImage: 'radial-gradient(rgba(255,255,255,0.12) 1px, transparent 1px)', backgroundSize: '2px 2px' }} />
       </motion.div>
       {children}
     </motion.div>

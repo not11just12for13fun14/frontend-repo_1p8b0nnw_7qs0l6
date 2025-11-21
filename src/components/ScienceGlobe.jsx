@@ -1,8 +1,14 @@
-import { motion } from 'framer-motion'
+import { motion, useScroll, useTransform } from 'framer-motion'
+import { useRef } from 'react'
 
 export default function ScienceGlobe() {
+  const ref = useRef(null)
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
+  const tilt = useTransform(scrollYProgress, [0, 1], [-12, 12])
+  const spread = useTransform(scrollYProgress, [0, 1], [0.85, 1.05])
+
   return (
-    <section className="relative bg-black py-24 md:py-28 overflow-hidden">
+    <section ref={ref} className="relative bg-black py-24 md:py-28 overflow-hidden">
       <div className="absolute inset-0" aria-hidden>
         <div className="absolute inset-0 bg-[radial-gradient(800px_400px_at_20%_50%,rgba(42,179,255,0.12),transparent_70%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(800px_600px_at_80%_40%,rgba(150,107,255,0.12),transparent_70%)]" />
@@ -37,14 +43,14 @@ export default function ScienceGlobe() {
         </div>
 
         {/* pseudo 3D globe using layered rings and gridlines */}
-        <div className="relative mx-auto w-[min(480px,85vw)] aspect-square">
+        <motion.div className="relative mx-auto w-[min(480px,85vw)] aspect-square" style={{ rotate: tilt }}>
           <div className="absolute inset-0 rounded-full bg-gradient-to-b from-[#06101F] to-black border border-white/10" />
           {[...Array(7)].map((_, i) => (
             <motion.div
               key={i}
               className="absolute inset-6 rounded-full border border-[#7DFBFF]/20"
               style={{ transform: `rotateX(65deg) rotate(${i * 10}deg)` }}
-              animate={{ opacity: [0.25, 0.6, 0.25] }}
+              animate={{ opacity: [0.25, 0.6, 0.25], scale: spread }}
               transition={{ repeat: Infinity, duration: 6 + i, ease: 'easeInOut' }}
             />
           ))}
@@ -53,7 +59,7 @@ export default function ScienceGlobe() {
               key={`v-${i}`}
               className="absolute left-1/2 top-1/2 h-[85%] w-[1px] bg-gradient-to-b from-transparent via-[#2AB3FF]/30 to-transparent"
               style={{ transform: `translate(-50%,-50%) rotate(${i * 15}deg)` }}
-              animate={{ opacity: [0.2, 0.5, 0.2] }}
+              animate={{ opacity: [0.2, 0.5, 0.2], scaleY: spread }}
               transition={{ repeat: Infinity, duration: 7 + i, ease: 'easeInOut' }}
             />
           ))}
@@ -76,7 +82,7 @@ export default function ScienceGlobe() {
             animate={{ boxShadow: ['0 0 0px rgba(125,251,255,0.0)', '0 0 48px rgba(125,251,255,0.25)', '0 0 0px rgba(125,251,255,0.0)'] }}
             transition={{ repeat: Infinity, duration: 6, ease: 'easeInOut' }}
           />
-        </div>
+        </motion.div>
       </div>
     </section>
   )
