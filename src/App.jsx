@@ -3,6 +3,8 @@ import Hero from './components/Hero'
 import ModuleOrbit from './components/ModuleOrbit'
 import ScienceGlobe from './components/ScienceGlobe'
 import ParticleField from './components/ParticleField'
+import FooterCTA from './components/FooterCTA'
+import ScrollScenes from './components/ScrollScenes'
 
 function App() {
   const handleStart = useCallback(() => {
@@ -17,16 +19,16 @@ function App() {
         <ParticleField />
       </div>
 
-      {/* main sections */}
+      {/* motion-enhanced scroll container */}
       <div className="relative">
-        <Hero onPrimary={handleStart} />
-        <div id="modules">
-          <ModuleOrbit />
-        </div>
-        <ScienceGlobe />
-        <footer className="relative bg-black/95 border-t border-white/10 py-10 text-center">
-          <p className="text-xs text-[#C9D4E0]">© {new Date().getFullYear()} STEM & Engineering School</p>
-        </footer>
+        <ScrollScenes>
+          <Hero onPrimary={handleStart} />
+          <div id="modules">
+            <ModuleOrbit />
+          </div>
+          <ScienceGlobe />
+          <FooterCTA />
+        </ScrollScenes>
       </div>
     </div>
   )

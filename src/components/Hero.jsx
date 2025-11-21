@@ -1,15 +1,19 @@
 import Spline from '@splinetool/react-spline'
 import { motion } from 'framer-motion'
+import MorphingBackdrop from './MorphingBackdrop'
 
 export default function Hero({ onPrimary }) {
   return (
-    <section className="relative min-h-[90vh] w-full flex items-center justify-center overflow-hidden bg-black">
+    <section className="relative min-h-[100vh] w-full flex items-center justify-center overflow-hidden bg-black">
       {/* cosmic gradient backdrop */}
       <div className="absolute inset-0" aria-hidden>
         <div className="absolute inset-0 bg-[radial-gradient(1200px_600px_at_50%_-20%,rgba(42,179,255,0.18),transparent_70%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(800px_500px_at_70%_30%,rgba(150,107,255,0.18),transparent_70%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(900px_600px_at_30%_60%,rgba(125,251,255,0.14),transparent_70%)]" />
       </div>
+
+      {/* morphing science backdrop */}
+      <MorphingBackdrop />
 
       {/* 3D Spline hero object */}
       <div className="absolute inset-0" aria-hidden>
